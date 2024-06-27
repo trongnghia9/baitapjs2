@@ -20,15 +20,11 @@ namespace ASM2_Main
         public abstract class Person : Information
         {
            
-            public int id { get; private set; }
+           
             public string name { get; private set; }
             public string address { get; private set; }
             public int age { get; private set; }
-            public int ID
-            {
-                get { return id; }
-                set { id = value; }
-            }
+           
 
             public string Name
             {
@@ -52,55 +48,23 @@ namespace ASM2_Main
 
             public virtual void ShowInformation()
             {
-                Console.WriteLine($"Person ID: {ID}, Name: {Name}, Address: {Address}, Age: {Age}");
+                Console.WriteLine($" Name: {Name}, Address: {Address}, Age: {Age}");
             }
         }
 
         public class Customer : Person
         {
+          public int id { get; private set; }
 
-            public int customerid { get; private set; } 
-            public string namecustomer { get; private set; } 
-            public string addresscustomer { get; private set; } 
-            public int agecustomer { get; private set; } 
-
-            public int CustomerID
+            public int ID
             {
-                get { return customerid; }
-                set { customerid = value; }
+                get { return id; }
+                set { id = value; }
             }
-
-            public string NameCustomer
-            {
-                get { return namecustomer; }
-                set { namecustomer = value; }
-            }
-
-            public string AddressCustomer
-            {
-                get { return addresscustomer; }
-                set { addresscustomer = value; }
-            }
-
-            public int AgeCustomer
-            {
-                get { return agecustomer; }
-                set { agecustomer = value; }
-            }
-
-            public Customer(int customerid, string namecustomer, string addresscustomer, int agecustomer)
-            {
-                CustomerID = customerid;
-                NameCustomer = namecustomer;
-                AddressCustomer = addresscustomer;
-                AgeCustomer = agecustomer;
-            }
-
-            public Customer() { }
 
             public override void ShowInformation()
             {
-                Console.WriteLine($"Customer ID: {CustomerID}, Namecustomer: {NameCustomer}, AddressCustomer: {AddressCustomer}, AgeCustomer: {AgeCustomer}");
+                Console.WriteLine($"ID: {ID}, Name: {Name}, Address: {Address}, Age: {Age}");
             }
         }
         public class CustomerManagement : Customer, IMenu
@@ -258,7 +222,7 @@ namespace ASM2_Main
                             }
                             else
                             {
-                                CustomerID = input;
+                                ID = input;
                                 idAlreadyExists.Add(input);
                                 isCustomerIdValid = true;
                             }
@@ -278,11 +242,11 @@ namespace ASM2_Main
                     }
                 }
                 // Customer Name
-                while (string.IsNullOrWhiteSpace(NameCustomer))
+                while (string.IsNullOrWhiteSpace(Name))
                 {
                     Console.WriteLine("Please enter the customer name: ");
-                    NameCustomer = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(NameCustomer))
+                    Name = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(Name))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Customer name cannot be empty. Please enter a valid name.");
@@ -290,11 +254,11 @@ namespace ASM2_Main
                     }
                 }
                 // Address Name
-                while (string.IsNullOrWhiteSpace(AddressCustomer))
+                while (string.IsNullOrWhiteSpace(Address))
                 {
                     Console.WriteLine("Please enter the address name: ");
-                    AddressCustomer = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(AddressCustomer))
+                    Address = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(Address))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Address name cannot be empty. Please enter a valid name.");
@@ -310,7 +274,7 @@ namespace ASM2_Main
                         int age = int.Parse(Console.ReadLine());
                         if (age > 0)
                         {
-                            AgeCustomer = age;
+                            Age = age;
                             break;
                         }
                         else
@@ -328,7 +292,7 @@ namespace ASM2_Main
                     }
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Customer with ID {CustomerID} added successfully!");
+                Console.WriteLine($"Customer with ID {ID} added successfully!");
                 Console.ResetColor();
                 Console.WriteLine("---------------------------- ");
             }
@@ -357,7 +321,7 @@ namespace ASM2_Main
                         {
                             for (int i = 0; i < customerlist.Count; i++)
                             {
-                                if (customerlist[i].CustomerID == customerid)
+                                if (customerlist[i].ID == customerid)
                                 {
                                     customerToUpdate = customerlist[i];
                                     isValidID = true;
@@ -390,14 +354,14 @@ namespace ASM2_Main
                 string newCustomerName = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(newCustomerName))
                 {
-                    customerToUpdate.NameCustomer = newCustomerName;
+                    customerToUpdate.Name = newCustomerName;
                 }
 
                 Console.WriteLine("Enter the new address name (or leave blank to keep the existing address name): ");
                 string newAddressCustomer = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(newAddressCustomer))
                 {
-                    customerToUpdate.AddressCustomer = newAddressCustomer;
+                    customerToUpdate.Address = newAddressCustomer;
                 }
 
                 Console.WriteLine("Enter the new age: ");
@@ -408,7 +372,7 @@ namespace ASM2_Main
                         int age = int.Parse(Console.ReadLine());
                         if (age > 0)
                         {
-                            customerToUpdate.AgeCustomer = age;
+                            customerToUpdate.Age = age;
                             break;
                         }
                         else
@@ -456,7 +420,7 @@ namespace ASM2_Main
                         {
                             for (int i = 0; i < customerlist.Count; i++)
                             {
-                                if (customerlist[i].CustomerID == customerid)
+                                if (customerlist[i].ID == customerid)
                                 {
                                     customerToDelete = customerlist[i];
                                     isValidID = true;
@@ -510,7 +474,7 @@ namespace ASM2_Main
                     for (int i = 0; i < customerlist.Count; i++)
                     {
                         var customer = customerlist[i];
-                        Console.WriteLine($":CustomerID {customer.CustomerID}; NameCustomer: {customer.NameCustomer}; AddressCustomer: {customer.AddressCustomer}; AgeCustomer: {customer.AgeCustomer}");
+                        Console.WriteLine($":CustomerID {customer.ID}; NameCustomer: {customer.Name}; AddressCustomer: {customer.Address}; AgeCustomer: {customer.Age}");
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Displayed successfully!");
                         Console.ResetColor();
@@ -550,9 +514,9 @@ namespace ASM2_Main
                         bool found = false;
                         foreach (var customer in customerlist)
                         {
-                            if (customer.CustomerID == customerid)
+                            if (customer.ID == customerid)
                             {
-                                Console.WriteLine($"CustomerID: {customer.CustomerID}; NameCustomer: {customer.NameCustomer}; AddressCustomer: {customer.AddressCustomer}; AgeCustomer: {customer.AgeCustomer}");
+                                Console.WriteLine($"CustomerID: {customer.ID}; NameCustomer: {customer.Name}; AddressCustomer: {customer.Address}; AgeCustomer: {customer.Age}");
                                 found = true;
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Customer found successfully.");
@@ -585,54 +549,20 @@ namespace ASM2_Main
         }
         public class Employee : Person
         {
+            public int id { get; private set; }
 
-
-            public int employeeid { get; private set; }
-            public string nameemployee { get; private set; }
-            public string addressemployye { get; private set; }
-            public int ageemployee { get; private set; }
-
-
-
-
-            public int EmployeeID
+            public int ID
             {
-                get { return employeeid; }
-                set { employeeid = value; }
+                get { return id; }
+                set { id = value; }
             }
-
-            public string NameEmployee
-            {
-                get { return nameemployee; }
-                set { nameemployee = value; }
-            }
-
-            public string AddressEmployye
-            {
-                get { return addressemployye; }
-                set { addressemployye = value; }
-            }
-
-            public int AgeEmployee
-            {
-                get { return ageemployee; }
-                set { ageemployee = value; }
-            }
-
-            public Employee(int employid, string nameemployee, string addressemployee, int ageemployee)
-            {
-                EmployeeID = employid;
-                NameEmployee = nameemployee;
-                AddressEmployye = addressemployee;
-                AgeEmployee = ageemployee;
-            }
-
-            public Employee() { }
 
             public override void ShowInformation()
             {
-                Console.WriteLine($"EmployeeID: {EmployeeID}, NameEmployee: {NameEmployee}, AddressEmployye: {AddressEmployye}, AgeEmployee: {AgeEmployee}");
+                Console.WriteLine($"ID: {ID}, Name: {Name}, Address: {Address}, Age: {Age}");
             }
+
+
         }
 
         public class EmployyeManagement : Employee, IMenu
@@ -792,7 +722,7 @@ namespace ASM2_Main
                             }
                             else // Nếu trùng
                             {
-                                EmployeeID = input;  // nhập employye ID
+                                ID = input;  // nhập employye ID
                                 idAlreadyExists.Add(input);
                                 isEmployyeIdValid = true;
                             }
@@ -812,11 +742,11 @@ namespace ASM2_Main
                     }
                 }
                 // Employye Name
-                while (string.IsNullOrWhiteSpace(NameEmployee))  // kiểm tra xem có phải null không, nếu có thì tiếp tục vòng lặp 
+                while (string.IsNullOrWhiteSpace(Name))  // kiểm tra xem có phải null không, nếu có thì tiếp tục vòng lặp 
                 {
                     Console.WriteLine("Please enter the employye name: ");
-                    NameEmployee = Console.ReadLine();  // nhập tên nhan vien
-                    if (string.IsNullOrWhiteSpace(NameEmployee))  // kiểm tra xem nhập vào có bị trống không, nếu có thì hiện thông báo lỗi
+                    Name = Console.ReadLine();  // nhập tên nhan vien
+                    if (string.IsNullOrWhiteSpace(Name))  // kiểm tra xem nhập vào có bị trống không, nếu có thì hiện thông báo lỗi
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Employye name cannot be empty. Please enter a valid name.");
@@ -824,11 +754,11 @@ namespace ASM2_Main
                     }
                 }
                 // Address Name
-                while (string.IsNullOrWhiteSpace(AddressEmployye))
+                while (string.IsNullOrWhiteSpace(Address))
                 {
                     Console.WriteLine("Please enter the address name: ");
-                    AddressEmployye = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(AddressEmployye))
+                    Address = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(Address))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Address name cannot be empty. Please enter a valid name.");
@@ -844,7 +774,7 @@ namespace ASM2_Main
                         int age = int.Parse(Console.ReadLine());  // chuyển đổi chuỗi thành số thực
                         if (age > 0)  // kiểm tra lớn hơn 0
                         {
-                            AgeEmployee = age;
+                            Age = age;
                             break;
                         }
                         else
@@ -862,7 +792,7 @@ namespace ASM2_Main
                     }
                 }
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Employye with ID {EmployeeID} added successfully!");
+                Console.WriteLine($"Employye with ID {ID} added successfully!");
                 Console.ResetColor();
                 Console.WriteLine("---------------------------- ");
             }
@@ -891,7 +821,7 @@ namespace ASM2_Main
                         {
                             for (int i = 0; i < employyelist.Count; i++)
                             {
-                                if (employyelist[i].EmployeeID == employyeid)
+                                if (employyelist[i].ID == employyeid)
                                 {
                                     employyeToUpdate = employyelist[i];
                                     isValidID = true;
@@ -924,14 +854,14 @@ namespace ASM2_Main
                 string newEmployyeName = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(newEmployyeName))
                 {
-                    employyeToUpdate.NameEmployee = newEmployyeName;
+                    employyeToUpdate.Name = newEmployyeName;
                 }
 
                 Console.WriteLine("Enter the new address name (or leave blank to keep the existing address name): ");
                 string newAddressName = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(newAddressName))
                 {
-                    employyeToUpdate.AddressEmployye = newAddressName;
+                    employyeToUpdate.Address = newAddressName;
                 }
 
                 Console.WriteLine("Enter the new age: ");
@@ -942,7 +872,7 @@ namespace ASM2_Main
                         int age = int.Parse(Console.ReadLine());
                         if (age > 0)
                         {
-                            employyeToUpdate.AgeEmployee = age;
+                            employyeToUpdate.Age = age;
                             break;
                         }
                         else
@@ -991,7 +921,7 @@ namespace ASM2_Main
                         {
                             for (int i = 0; i < employyelist.Count; i++)
                             {
-                                if (employyelist[i].EmployeeID == employyeid)
+                                if (employyelist[i].ID == employyeid)
                                 {
                                     employyeToDelete = employyelist[i];
                                     isValidID = true;
@@ -1043,7 +973,7 @@ namespace ASM2_Main
                     for (int i = 0; i < employyelist.Count; i++)
                     {
                         var employee = employyelist[i];
-                        Console.WriteLine($"EmployeeID: {employee.EmployeeID}; NameEmployee: {employee.NameEmployee}; AddressEmployye: {employee.AddressEmployye}; AgeEmployee: {employee.AgeEmployee}");
+                        Console.WriteLine($"EmployeeID: {employee.ID}; NameEmployee: {employee.Name}; AddressEmployye: {employee.Address}; AgeEmployee: {employee.Age}");
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Displayed successfully!");
                         Console.ResetColor();
@@ -1084,9 +1014,9 @@ namespace ASM2_Main
                         bool found = false;
                         foreach (var employee in employyelist)
                         {
-                            if (employee.EmployeeID == employeeid)
+                            if (employee.ID == employeeid)
                             {
-                                Console.WriteLine($"EmployeeID: {employee.EmployeeID}; NameEmployee: {employee.NameEmployee}; AddressEmployye: {employee.AddressEmployye}; AgeEmployee: {employee.AgeEmployee}");
+                                Console.WriteLine($"EmployeeID: {employee.ID}; NameEmployee: {employee.Name}; AddressEmployye: {employee.Address}; AgeEmployee: {employee.Age}");
                                 found = true;
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("Employye found successfully.");
